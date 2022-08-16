@@ -1,10 +1,10 @@
-package com.callor.hello;
+package com.callor.data;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HelloApplicationTests {
+class DataApplicationTests {
 
 	@Test
 	void contextLoads() {

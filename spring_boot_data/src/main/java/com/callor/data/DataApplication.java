@@ -1,12 +1,13 @@
-package com.callor.hello;
+package com.callor.data;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HelloApplication {
+public class DataApplication {
+
 	public static void main(String[] args) {
-		SpringApplication.run(HelloApplication.class, args);
+		SpringApplication.run(DataApplication.class, args);
 	}
 
 }
