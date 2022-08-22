@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -28,7 +29,41 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookVO findById(String isbn) {
-        return null;
+        /*
+        일반적인 한개의 데이터를 SELECT하는 코드
+        BookVO bookVO = findById(isbn)
+
+        if(bookVO != null || bookVO.isEmpty() {
+            log.debug(bookVO.toString())
+        }
+
+        try {
+            log.debug(bookVO.toString())
+        } catch {
+            log.debug("NULL")
+        }
+
+        log.debug(" {} ",bookVO)
+         */
+
+        /*
+        JPA의 findById()는 return 타입이 Optional<T>이다
+        Optional 타입은 데이터가 null인 경우를 좀 더 쉽게 처리 할 수 있도록 도와주는 도구이다
+         */
+
+        Optional<BookVO> opBookVO = bookDao.findById(isbn);
+
+        /*
+        Optional 데이터에서 실제 필요한 데이터(bookVO)를 추출하기 위하여
+        get() method도 사용가능 하지만
+        orElse()와 같은 method를 사용하여
+        만약 포함된 데이터(bookVO)가 null일 경우 다른 값을 생성하여 bookVO 데이터가 절대 null이 아니도록
+        처리 할 수 있다
+         */
+
+        BookVO bookVO = opBookVO.orElse(new BookVO());
+
+        return bookVO;
     }
 
     @Override

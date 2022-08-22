@@ -40,6 +40,11 @@ public class BookVO {
     @Column(length = 10)
     private String pubdate; // 출판일
 
+    /*
+    int형 일 경우
+    기본값이 NOT NULL로 설정되므로
+    임의로 nullable을 true로 설정
+     */
     @Column(nullable = true)
     private int price; // 정가
 }

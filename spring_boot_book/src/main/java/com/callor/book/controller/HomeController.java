@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,12 +22,18 @@ public class HomeController {
     }
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
-    public String home(Model model) {
+    public String home(@RequestParam(name = "code", required = false, defaultValue = "") String isbn, Model model) {
         List<BookVO> bookList = bookService.selectAll();
-        
+
+        if (isbn != null || !isbn.isEmpty()) {
+            BookVO bookVO = bookService.findById(isbn);
+            model.addAttribute("BOOK", bookVO);
+            log.debug("find By Data {}", bookVO);
+        }
+
         model.addAttribute("BOOKS", bookList);
 
-        return "home";
+        return "index";
     }
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
